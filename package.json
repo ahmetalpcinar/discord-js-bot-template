@@ -1,0 +1,17 @@
+{
+  "name": "discord-js-bot-template",
+  "version": "1.0.0",
+  "description": "Discord bot template with prefix and slash commands, built on discord.js 14",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "CC0-1.0",
+  "dependencies": {
+    "@discordjs/voice": "^0.17.0",
+    "better-sqlite3": "^11.0.0",
+    "discord.js": "^14.15.0",
+    "dotenv": "^16.4.0",
+    "quick.db": "^9.1.7"
+  }
+}

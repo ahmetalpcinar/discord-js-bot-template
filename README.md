@@ -1,38 +1,56 @@
-## ❗ Bilgi
-Bu proje, JavaScript ile Discord botu oluşturmanıza olanak sağlamaktadır. Aşağıda verilen adımları sırası ile takip ettikten sonra artık sizde bir Bot Developer'ı olabilirsiniz!
+# Discord.js Bot Template
 
-## 📁 Dosya Kurulumu
-- İlk olarak bilgisayarınıza uygun olacak ayarlarda [Node.js](https://nodejs.org/en) dosyasını indirmeniz ve indirdiğiniz dosyayı bilgisayarınıza kurmanız gerekmektedir.
-- Ardından projenize bir isim vererek masaüstünüze klasör açmanız gerekmektedir.
-- Bir IDE yardımı ile oluşturduğunuz bu klasörü açmanız gerekmektedir. Ben [Visual Studio Code](https://code.visualstudio.com) IDE'sini kullanıyorum ve tavsiye ediyorum.
-- VSC de dosyanızı açtıktan sonra Terminal seçeneğine basıp ardından da Yeni Terminal ile projemize bir terminal oluşturuyoruz.
-- Açılan terminale sırası ile `npm init -y`, `npm i discord.js`, `npm i @discordjs/voice`, `npm i dotenv`, `npm i quick.db` ve son olarak `npm i better-sqlite3` yazarak gerekli kütüphaneleri kuruyoruz.
+Prefix, slash komutları, buton, modal ve menü etkileşimleri için hazır dosya yapısı sunan, JavaScript ile yazılmış Discord bot şablonu. Komutlar ve olaylar klasörlerden otomatik yüklenir; yeni komut eklemek için ilgili klasöre bir dosya eklemek yeterlidir.
 
-## 💻 Yazılım Kurulumu
-- Ardından bu proje de yer alan `.env`, `index.js` ve `sources` dosyalarını proje klasörümüzün içine atıyoruz.
-- Botumuz şu durumda tamamen hazır hale geliyor ve sadece token ekleme kısmı kalıyor.
-- Ardından [Discord Developer Portal](https://discord.com/developers/applications) sitesini açıyoruz ve buradan kendimize yeni bir uygulama oluşturuyoruz.
-- Oluşturduğumuz uygulamaya tıklayıp içinde bulunan Bot sayfasına tıklıyoruz.
-- Bot sayfasında aşağıda belirtilen gereksinimleri açtıktan sonra Reset Token yazısına tıklayacaksınız.
-- Burada oluşan uzun yazı, botunuza ait token yani "çalıştırma anahtarı"dır.
-- Bu token'ı kopyalayıp proje klasörünüzün içinde ki `.env` dosyasına girerek aşağıda ki gibi dolduracaksınız.
-- Tekrar terminale girdikten sonra `node index.js` yazarak botunuzu başlatabilirsiniz!
+## Teknolojiler
 
-<img src="https://github.com/ahmetalpcinar/ahmetalpcinar/blob/main/PNG/Images/imageDC1.png">
+- JavaScript, Node.js
+- discord.js 14, @discordjs/voice
+- quick.db (SQLite, better-sqlite3)
+- dotenv
 
-```javascript
-prefix = "."
-owner = "KULLANICI_IDNIZ"
-guild = "SUNUCU_IDINIZ"
-token = "TOKENINIZ"
+## Özellikler
+
+- Prefix ile çalışan metin komutları (`sources/commands/base/`)
+- Slash komutları (`sources/commands/home/`), global veya sunucuya özel kaydedilebilir
+- Buton, modal, seçim menüsü ve context menu için boş şablonlar (`sources/admins/tools/`)
+- Olay yöneticileri (`sources/events/client/`) ve cooldown yardımcıları (`sources/utils/client/`)
+- İsteğe bağlı: botun belirli bir ses kanalında kalması
+
+## Kurulum
+
+Gereksinim: Node.js 18 veya üzeri.
+
+```bash
+git clone https://github.com/ahmetalpcinar/discord-js-bot-template.git
+cd discord-js-bot-template
+npm install
+cp .env.example .env
 ```
 
-## ✨ Kullanımı
-- Prefix ile kullanılan komutlar için `sources/commands/base/` dizinine açtığınız her klasörün içine farklı komut dosyaları oluşturabilirsiniz.
-- Slash ile kullanılan komutlar için `sources/commands/home/` dizinine açtığınız her klasörün içine farklı komut dosyaları oluşturabilirsiniz.
-- `sources/admins/tools` dizinin de botunuz da kullanabileceğiniz bütün yapılar bulunmaktadır.
-- Proje tamamen değiştirilebilir bir yapıda hazırlanmıştır ve kullanımı kolaydır!
+`.env` dosyasını doldurun:
 
-## 🎉 Notlar
-- `sources/events/client/ready.js` dizinin de bulunan `const channel = client.channels.cache.get("KANAL_IDSI");` kod bloğuna bir Ses Kanal IDsi yazarak botunuzun aktif olduğu sürelerde o kanalda durmasını sağlayabilirsiniz!
-- `sources/events/client/ready.js` dizinin de bulunan `slashcommands(client, "Global");` kod bloğuna `Global` yazarsanız komutlar botun içine, `Guild` yazarsanız sunucunun içine aktarılır.
+```env
+prefix = "."
+owner = "KULLANICI_ID"
+guild = "SUNUCU_ID"
+token = "BOT_TOKEN"
+```
+
+Token, [Discord Developer Portal](https://discord.com/developers/applications) üzerinde uygulamanızın Bot sayfasından alınır. `.env` dosyası `.gitignore` içindedir, repoya gönderilmez.
+
+```bash
+npm start
+```
+
+## Kullanım
+
+- Prefix komutları için `sources/commands/base/<kategori>/` altına bir dosya ekleyin.
+- Slash komutları için `sources/commands/home/<kategori>/` altına bir dosya ekleyin. Örnek için `ornek.js` dosyalarına bakın.
+- `sources/events/client/ready.js` içinde `slashcommands(client, "Global")` ifadesini `"Guild"` yaparak komutları yalnızca tek sunucuya kaydedebilirsiniz.
+
+<img src="https://raw.githubusercontent.com/ahmetalpcinar/ahmetalpcinar/main/PNG/Images/imageDC1.png" alt="Bot kurulum ekranı">
+
+## Lisans
+
+CC0 1.0. Bkz. [LICENSE](LICENSE).
